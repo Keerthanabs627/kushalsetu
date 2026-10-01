@@ -5,8 +5,13 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 import crypto from 'crypto';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
+
+// ESM compatibility for __filename and __dirname (required for Render / Node 20+ / Bun)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
