@@ -1,0 +1,6 @@
+{
+  "name": "KaushalSetu AI - Bharat Workforce Command Center",
+  "description": "Autonomous Employability Intelligence Platform powered by LangGraph 8-Agent Pipeline, NSQF Level 3-5 alignment, MSME demand intelligence, and digital Employability Passport.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

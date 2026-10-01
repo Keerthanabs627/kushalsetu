@@ -1,0 +1,62 @@
+[
+  {
+    "domain": "Green Energy & EV",
+    "trigger_skills": ["electrician", "wiring", "welder", "automotive mechanic"],
+    "future_skills": [
+      {
+        "name": "EV Battery Swapping & BMS Telematics",
+        "relevance": "High",
+        "market_premium": "+35% wage boost",
+        "learning_time_weeks": 3,
+        "nsqf_upgrade": "Level 4 -> Level 5"
+      },
+      {
+        "name": "Solar Micro-Inverter Cloud Diagnostics & Rapid Shutdown (RSD)",
+        "relevance": "High",
+        "market_premium": "+25% wage boost",
+        "learning_time_weeks": 2,
+        "nsqf_upgrade": "Level 3 -> Level 4"
+      }
+    ]
+  },
+  {
+    "domain": "Smart Fabrication & Industry 4.0",
+    "trigger_skills": ["welding", "tig", "mig", "machinist", "fitter"],
+    "future_skills": [
+      {
+        "name": "Robotic Arm Teaching Pendant Programming (Cobots)",
+        "relevance": "High",
+        "market_premium": "+40% wage boost",
+        "learning_time_weeks": 4,
+        "nsqf_upgrade": "Level 4 -> Level 5"
+      },
+      {
+        "name": "Automated Laser Seam Tracking & Inert Shield Gas Analyzer",
+        "relevance": "Medium",
+        "market_premium": "+30% wage boost",
+        "learning_time_weeks": 3,
+        "nsqf_upgrade": "Level 4 -> Level 5"
+      }
+    ]
+  },
+  {
+    "domain": "Industrial IoT & Electrical",
+    "trigger_skills": ["electrician", "wireman", "maintenance", "pump mechanic"],
+    "future_skills": [
+      {
+        "name": "Wireless Vibration Sensor & Edge Modbus Gateway Integration",
+        "relevance": "High",
+        "market_premium": "+30% wage boost",
+        "learning_time_weeks": 3,
+        "nsqf_upgrade": "Level 4 -> Level 5"
+      },
+      {
+        "name": "Variable Frequency Drive (VFD) Energy Optimization",
+        "relevance": "High",
+        "market_premium": "+25% wage boost",
+        "learning_time_weeks": 2,
+        "nsqf_upgrade": "Level 3 -> Level 4"
+      }
+    ]
+  }
+]

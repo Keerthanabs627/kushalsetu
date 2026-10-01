@@ -1,0 +1,130 @@
+[
+  {
+    "qp_code": "CSC/Q0204",
+    "role_name": "Manual Metal Arc Welder / SMAW Specialist",
+    "sector": "Capital Goods & Fabrication",
+    "nsqf_level": 3,
+    "core_competencies": [
+      "Shielded Metal Arc Welding",
+      "Weld joint beveling and surface prep",
+      "Oxy-acetylene gas cutting",
+      "Root pass and capping inspection",
+      "Shop safety & PPE compliance"
+    ],
+    "typical_salary_min": 18000,
+    "typical_salary_max": 26000,
+    "progression_roles": ["MIG/MAG Welder (NSQF 4)", "Welding Supervisor / QA Inspector (NSQF 5)"]
+  },
+  {
+    "qp_code": "CSC/Q0209",
+    "role_name": "MIG/MAG & TIG Welder",
+    "sector": "Capital Goods & Automotive",
+    "nsqf_level": 4,
+    "core_competencies": [
+      "GMAW / GTAW welding techniques",
+      "Argon/CO2 shielding gas mixture calibration",
+      "Blueprint and welding symbol interpretation",
+      "NDT dye-penetrant inspection basics",
+      "Stainless steel and aluminum joint fabrication"
+    ],
+    "typical_salary_min": 24000,
+    "typical_salary_max": 38000,
+    "progression_roles": ["Robotic Welding Operator (NSQF 5)", "Welding Lead Technologist (NSQF 6)"]
+  },
+  {
+    "qp_code": "ELE/Q1401",
+    "role_name": "Solar PV System Installation & Maintenance Technician",
+    "sector": "Green Energy & Electronics",
+    "nsqf_level": 4,
+    "core_competencies": [
+      "Rooftop solar module mounting and anchoring",
+      "DC string wiring, combiner box and MC4 crimping",
+      "Grid-tied inverter synchronization & grounding",
+      "Insulation resistance (Megger) & open-circuit voltage testing",
+      "Net-metering compliance and hazard protection"
+    ],
+    "typical_salary_min": 22000,
+    "typical_salary_max": 36000,
+    "progression_roles": ["Solar Microgrid Commissioning Engineer (NSQF 5)", "Energy Storage Lead (NSQF 6)"]
+  },
+  {
+    "qp_code": "ASC/Q1411",
+    "role_name": "Electric Vehicle (EV) Assembly & Retrofit Technician",
+    "sector": "Automotive & Electric Mobility",
+    "nsqf_level": 4,
+    "core_competencies": [
+      "BLDC & PMSM electric motor diagnostics",
+      "Lithium-ion BMS wiring and cell voltage balancing",
+      "High-voltage orange cable harness routing",
+      "Regenerative braking calibration",
+      "CAN bus diagnostic tool scanning (OBD-II/UDS)"
+    ],
+    "typical_salary_min": 26000,
+    "typical_salary_max": 42000,
+    "progression_roles": ["EV Powertrain Diagnostic Lead (NSQF 5)", "Fleet Electrification Specialist (NSQF 6)"]
+  },
+  {
+    "qp_code": "CON/Q0602",
+    "role_name": "General Electrician - Domestic & Industrial",
+    "sector": "Construction & Facility Management",
+    "nsqf_level": 3,
+    "core_competencies": [
+      "Conduit laying and 3-phase DB wiring",
+      "MCB/RCCB selection and earth resistance testing",
+      "Motor starter wiring (DOL & Star-Delta)",
+      "Single-line diagram (SLD) troubleshooting",
+      "Industrial earthing pit maintenance"
+    ],
+    "typical_salary_min": 19000,
+    "typical_salary_max": 28000,
+    "progression_roles": ["Industrial Automation Technician (NSQF 4)", "Substation Electrical Supervisor (NSQF 5)"]
+  },
+  {
+    "qp_code": "CSC/Q0115",
+    "role_name": "CNC Milling & Turning Operator",
+    "sector": "Capital Goods & Precision Engineering",
+    "nsqf_level": 4,
+    "core_competencies": [
+      "G-code and M-code offset setting",
+      "Vernier, micrometer and height gauge tolerance checks (±10µm)",
+      "Workpiece clamping with hydraulic chucks and vices",
+      "Tool wear compensation and insert replacement",
+      "Coolant flow and chip evacuation management"
+    ],
+    "typical_salary_min": 25000,
+    "typical_salary_max": 40000,
+    "progression_roles": ["CNC Programmer & CAM Specialist (NSQF 5)", "Tool Room In-Charge (NSQF 6)"]
+  },
+  {
+    "qp_code": "PSC/Q0108",
+    "role_name": "Automotive Service Technician - 2W/4W",
+    "sector": "Automotive Repair & Services",
+    "nsqf_level": 4,
+    "core_competencies": [
+      "Internal combustion engine valve timing and overhaul",
+      "Electronic Fuel Injection (EFI) sensor diagnostics",
+      "Hydraulic brake line bleeding and ABS sensor inspection",
+      "Suspension strut replacement and wheel alignment",
+      "Digital scanning and DTC error code clearing"
+    ],
+    "typical_salary_min": 20000,
+    "typical_salary_max": 34000,
+    "progression_roles": ["Hybrid/EV Diagnostic Master (NSQF 5)", "Service Workshop Manager (NSQF 6)"]
+  },
+  {
+    "qp_code": "ELE/Q0120",
+    "role_name": "Industrial IoT & Automation Maintenance Specialist",
+    "sector": "Smart Manufacturing & Electronics",
+    "nsqf_level": 5,
+    "core_competencies": [
+      "PLC ladder logic programming (Siemens/Allen-Bradley)",
+      "Modbus/RS485 sensor network commissioning",
+      "Pneumatics & proportional valve interfacing",
+      "SCADA dashboard telemetry monitoring",
+      "Preventive predictive maintenance logging"
+    ],
+    "typical_salary_min": 32000,
+    "typical_salary_max": 52000,
+    "progression_roles": ["Industry 4.0 Systems Integrator (NSQF 6)"]
+  }
+]

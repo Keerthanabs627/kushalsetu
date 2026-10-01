@@ -1,0 +1,306 @@
+import React, { useState } from 'react';
+import { PRESET_PROFILES, PresetProfile, SAMPLE_IMAGES } from '../data/presets';
+import { Sparkles, UploadCloud, Mic, MapPin, Briefcase, Globe, User, Image as ImageIcon, CheckCircle, RefreshCw } from 'lucide-react';
+
+interface WorkerIntakePanelProps {
+  onTriggerPipeline: (inputs: {
+    worker_name: string;
+    location: string;
+    preferred_language: string;
+    trade_description: string;
+    experience_years: number;
+    phone_number: string;
+    uploaded_image?: string | null;
+  }) => void;
+  isRunning: boolean;
+}
+
+export const WorkerIntakePanel: React.FC<WorkerIntakePanelProps> = ({ onTriggerPipeline, isRunning }) => {
+  const [selectedPresetId, setSelectedPresetId] = useState<string>('p1');
+  const [workerName, setWorkerName] = useState<string>(PRESET_PROFILES[0].name);
+  const [location, setLocation] = useState<string>(PRESET_PROFILES[0].location);
+  const [language, setLanguage] = useState<string>(PRESET_PROFILES[0].language);
+  const [experience, setExperience] = useState<number>(PRESET_PROFILES[0].experience);
+  const [phone, setPhone] = useState<string>(PRESET_PROFILES[0].phone);
+  const [tradeDescription, setTradeDescription] = useState<string>(PRESET_PROFILES[0].tradeDescription);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(PRESET_PROFILES[0].imageThumbnail);
+  const [isSimulatingSpeech, setIsSimulatingSpeech] = useState<boolean>(false);
+
+  const handleSelectPreset = (preset: PresetProfile) => {
+    setSelectedPresetId(preset.id);
+    setWorkerName(preset.name);
+    setLocation(preset.location);
+    setLanguage(preset.language);
+    setExperience(preset.experience);
+    setPhone(preset.phone);
+    setTradeDescription(preset.tradeDescription);
+    setUploadedImage(preset.imageThumbnail);
+  };
+
+  const handleCustomFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setUploadedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSpeechSimulation = () => {
+    setIsSimulatingSpeech(true);
+    setTimeout(() => {
+      setIsSimulatingSpeech(false);
+    }, 1200);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!workerName.trim() || !tradeDescription.trim()) return;
+
+    onTriggerPipeline({
+      worker_name: workerName,
+      location,
+      preferred_language: language,
+      trade_description: tradeDescription,
+      experience_years: experience,
+      phone_number: phone,
+      uploaded_image: uploadedImage
+    });
+  };
+
+  return (
+    <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl flex flex-col h-full backdrop-blur-sm">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+        <div className="flex items-center gap-2">
+          <div className="p-1.5 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400">
+            <User className="w-4 h-4" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-white tracking-tight">Worker Intake Form</h2>
+            <p className="text-[11px] text-slate-400">Multimodal Vernacular Blue-Collar Profile</p>
+          </div>
+        </div>
+        <span className="text-[10px] font-semibold bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+          Node 1 Inputs
+        </span>
+      </div>
+
+      {/* Preset Profiles Selector */}
+      <div className="mb-4">
+        <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+          ⚡ Quick Benchmark Profiles
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          {PRESET_PROFILES.map((p) => {
+            const isSelected = selectedPresetId === p.id;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => handleSelectPreset(p)}
+                className={`text-left p-2 rounded-xl border text-xs transition-all ${
+                  isSelected
+                    ? 'bg-orange-500/15 border-orange-500/50 text-orange-200 shadow-sm'
+                    : 'bg-slate-800/60 border-slate-700/60 hover:bg-slate-800 text-slate-300'
+                }`}
+              >
+                <div className="font-bold truncate text-white">{p.name}</div>
+                <div className="text-[10px] text-slate-400 truncate">{p.roleTitle}</div>
+                <div className="text-[9px] text-amber-400/80 font-medium mt-0.5">{p.location.split(',')[0]}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-3.5 flex-1 flex flex-col justify-between">
+        <div className="space-y-3">
+          {/* Worker Name & Phone */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label className="text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
+                <span>Worker Full Name</span>
+              </label>
+              <input
+                type="text"
+                required
+                value={workerName}
+                onChange={(e) => setWorkerName(e.target.value)}
+                placeholder="e.g. Ramesh Kumar"
+                className="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
+                <span>WhatsApp Contact</span>
+              </label>
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+91 98450 12894"
+                className="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+              />
+            </div>
+          </div>
+
+          {/* Location & Preferred Language */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label className="text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                <span>Location / Industrial Hub</span>
+              </label>
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="e.g. Peenya, Bengaluru"
+                className="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
+                <Globe className="w-3.5 h-3.5 text-sky-400" />
+                <span>Preferred Language</span>
+              </label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-orange-500 transition-colors"
+              >
+                <option value="Hindi">Hindi (हिंदी)</option>
+                <option value="Marathi">Marathi (मराठी)</option>
+                <option value="Tamil">Tamil (தமிழ்)</option>
+                <option value="Telugu">Telugu (తెలుగు)</option>
+                <option value="Kannada">Kannada (ಕನ್ನಡ)</option>
+                <option value="Bengali">Bengali (বাংলা)</option>
+                <option value="English">English</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Experience Slider */}
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1">
+                <Briefcase className="w-3.5 h-3.5 text-amber-400" />
+                <span>Hands-on Experience</span>
+              </label>
+              <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                {experience} Years
+              </span>
+            </div>
+            <input
+              type="range"
+              min="0.5"
+              max="20"
+              step="0.5"
+              value={experience}
+              onChange={(e) => setExperience(parseFloat(e.target.value))}
+              className="w-full accent-orange-500 cursor-pointer h-1.5 bg-slate-700 rounded-lg"
+            />
+          </div>
+
+          {/* Trade Description with Voice Simulation */}
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1">
+                <span>Trade Description (Vernacular Voice/Text)</span>
+              </label>
+              <button
+                type="button"
+                onClick={handleSpeechSimulation}
+                className={`text-[10px] flex items-center gap-1 px-2 py-0.5 rounded transition-all ${
+                  isSimulatingSpeech
+                    ? 'bg-rose-500 text-white animate-pulse'
+                    : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700'
+                }`}
+                title="Simulate speech-to-text recording"
+              >
+                <Mic className="w-3 h-3 text-rose-400" />
+                <span>{isSimulatingSpeech ? 'Listening...' : 'Voice Input'}</span>
+              </button>
+            </div>
+            <textarea
+              required
+              rows={3}
+              value={tradeDescription}
+              onChange={(e) => setTradeDescription(e.target.value)}
+              placeholder="Describe your craft, tools used, metals worked on, or machines operated in your native language..."
+              className="w-full bg-slate-800/90 border border-slate-700 rounded-lg p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors resize-none leading-relaxed font-sans"
+            />
+          </div>
+
+          {/* Multimodal Image Upload */}
+          <div>
+            <label className="text-xs font-semibold text-slate-300 mb-1 flex items-center justify-between">
+              <span className="flex items-center gap-1">
+                <ImageIcon className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Workpiece / Tool Photo (Gemini Vision)</span>
+              </span>
+              <span className="text-[10px] text-emerald-400/90 font-mono">Multimodal Ready</span>
+            </label>
+
+            {uploadedImage ? (
+              <div className="relative group rounded-xl overflow-hidden border border-emerald-500/40 bg-slate-800/80 p-2 flex items-center gap-3">
+                <img
+                  src={uploadedImage}
+                  alt="Workpiece Evidence"
+                  className="w-16 h-12 rounded-lg object-cover border border-slate-700 bg-slate-900"
+                />
+                <div className="flex-1 min-w-0 text-xs">
+                  <div className="font-semibold text-emerald-400 flex items-center gap-1 text-[11px]">
+                    <CheckCircle className="w-3 h-3" /> Visual Evidence Attached
+                  </div>
+                  <div className="text-[10px] text-slate-400 truncate">
+                    Ready for Gemini Vision tool & weld inspection
+                  </div>
+                </div>
+                <label className="cursor-pointer text-[10px] bg-slate-700 hover:bg-slate-600 text-white px-2 py-1 rounded border border-slate-600 transition-colors">
+                  Change
+                  <input type="file" accept="image/*" onChange={handleCustomFileUpload} className="hidden" />
+                </label>
+              </div>
+            ) : (
+              <label className="border-2 border-dashed border-slate-700 hover:border-slate-500 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition-colors bg-slate-800/40">
+                <UploadCloud className="w-5 h-5 text-slate-400 mb-1" />
+                <span className="text-[11px] font-medium text-slate-300">Upload tool or joint photo</span>
+                <span className="text-[9px] text-slate-500">PNG, JPG, or SVG up to 10MB</span>
+                <input type="file" accept="image/*" onChange={handleCustomFileUpload} className="hidden" />
+              </label>
+            )}
+          </div>
+        </div>
+
+        {/* Submit Pipeline Trigger Button */}
+        <div className="pt-3">
+          <button
+            type="submit"
+            disabled={isRunning}
+            className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all ${
+              isRunning
+                ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
+                : 'bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 active:scale-[0.99] text-white shadow-orange-500/20'
+            }`}
+          >
+            {isRunning ? (
+              <>
+                <RefreshCw className="w-4 h-4 animate-spin text-orange-400" />
+                <span>Running 8-Agent Pipeline...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4 text-amber-200" />
+                <span>Trigger Autonomous Intelligence Pipeline</span>
+              </>
+            )}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
