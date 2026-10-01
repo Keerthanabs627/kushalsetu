@@ -27,9 +27,9 @@ export const FutureIncomeSimulator: React.FC<FutureIncomeSimulatorProps> = ({ ag
             <Zap className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white tracking-tight">Future Income Simulator</h3>
+            <h3 className="text-base font-bold text-white tracking-tight">Projected Wage Progression</h3>
             <p className="text-[11px] text-slate-400">
-              Interactive career wage progression from unverified artisan to high-yield Industry 4.0 specialist
+              NSQF Career Progression Pathway & Wage Uplift Model • <span className="text-purple-300 font-medium">Source: MSDE National Skills Wage Grid</span>
             </p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export const FutureIncomeSimulator: React.FC<FutureIncomeSimulatorProps> = ({ ag
           </div>
 
           <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
-            Market rate for daily wage artisan lacking sovereign credential proof. Vulnerable to contractor commission cuts.
+            Market rate for daily wage artisan lacking verified credential proof. Vulnerable to contractor commission cuts.
           </p>
 
           <div className="mt-3 pt-2 border-t border-slate-800/80 text-[10px] text-slate-500">

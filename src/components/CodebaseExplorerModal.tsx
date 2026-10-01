@@ -8,6 +8,66 @@ interface CodebaseExplorerModalProps {
 
 const FILE_REGISTRY: { path: string; language: string; summary: string; code: string }[] = [
   {
+    path: 'ARCHITECTURE.md',
+    language: 'markdown',
+    summary: 'Visual multi-agent system architecture diagram and sequential pipeline flow.',
+    code: `# KaushalSetu AI: Multi-Agent System Architecture
+
+================================================================================
+                    KAUSHALSETU AI AGENT STATE MACHINE
+================================================================================
+
+                                Worker Input
+            (Vernacular Audio / Text Intake + Shopfloor Workpiece Photo)
+                                     │
+                                     ▼
+                            [ Voice/Text Agent ]
+                     - Native Dialect Transliteration
+                     - Phonetic Trade Keyword Parsing
+                                     │
+                                     ▼
+                             [ Vision Agent ]
+                     - Gemini 3.5 Flash Multimodal Vision
+                     - Tool, Joint & PPE Safety Verification
+                                     │
+                                     ▼
+                        [ Skill Extraction Agent ]
+                     - Procedural Micro-Competency Tagging
+                     - Directed Competency Graph Generation
+                                     │
+                                     ▼
+                          [ NSQF Mapping Agent ]
+                     - MSDE / NSDC Standards Alignment
+                     - National Qualification Pack (QP-NOS Level 3–5)
+                                     │
+                                     ▼
+                          [ Future Skill Agent ]
+                     - Industry 4.0 / EV / Automation Gaps
+                     - +25% to +45% Wage Uplift Potential
+                                     │
+                                     ▼
+                       [ Upskilling Planner Agent ]
+                     - 4-Week Practical Micro-Curriculum
+                     - Asynchronous Shopfloor Exercises
+                                     │
+                                     ▼
+                         [ MSME Matching Agent ]
+                     - Geospatial Industrial Cluster Radar
+                     - Zero Middleman Commission Matching
+                                     │
+                                     ▼
+                        [ Digital Passport Agent ]
+                     - DigiLocker-Compatible Verifiable Credential
+                     - Tamper-Evident SHA-256 Cryptographic Hash
+                                     │
+                                     ▼
+                        [ WhatsApp Outreach Agent ]
+                     - Direct wa.me Plant Supervisor Connect
+                     - Instant localized recruitment dispatch
+
+================================================================================`
+  },
+  {
     path: 'kaushalsetu/backend/state.py',
     language: 'python',
     summary: 'TypedDict AgentState tracking the 8-agent LangGraph workflow.',
@@ -223,8 +283,8 @@ export const CodebaseExplorerModal: React.FC<CodebaseExplorerModalProps> = ({ is
               <Cpu className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">KaushalSetu AI • Python & LangGraph Codebase</h2>
-              <p className="text-xs text-slate-400">Generated production files in /kaushalsetu/</p>
+              <h2 className="text-base font-bold text-white">KaushalSetu AI • System Architecture & Pipeline Code</h2>
+              <p className="text-xs text-slate-400">End-to-end multi-agent state graph architecture & production pipeline files</p>
             </div>
           </div>
 

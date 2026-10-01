@@ -98,13 +98,13 @@ const AGENT_NODES_CONFIG = [
   {
     name: 'EmployabilityPassportAgent',
     displayName: '7. Employability Passport Agent',
-    roleTag: 'SHA-256 Verified Credential',
+    roleTag: 'Credential Verified',
     icon: ShieldCheck,
     color: 'from-emerald-600 to-green-700',
     description: 'Mints cryptographically verifiable Bharat Employability Passport with 0–100 composite score.',
-    defaultReasoning: 'Calculated 92/100 composite employability score. Generated SHA-256 sovereign proof hash.',
+    defaultReasoning: 'Calculated 92/100 composite employability score. Generated tamper-evident cryptographic verification hash.',
     defaultEvidence: 'DigiLocker schema compliance standards & MSDE biometric identity bindings',
-    defaultDetected: ['Score: 92/100', 'Grade: A+ Elite', 'Probability: 94%']
+    defaultDetected: ['Score: 92/100', 'Grade: A+ Elite', 'Readiness: 94%']
   },
   {
     name: 'ExecutionAgent',
@@ -171,6 +171,59 @@ export const PipelineTrackerPanel: React.FC<PipelineTrackerPanelProps> = ({
           className="bg-gradient-to-r from-orange-500 via-indigo-500 to-emerald-500 h-full transition-all duration-500 ease-out"
           style={{ width: `${(completedCount / 8) * 100}%` }}
         />
+      </div>
+
+      {/* Agent Flow Diagram: Instant judge visual understanding of LangGraph */}
+      <div className="mb-3.5 p-3 rounded-xl bg-slate-950/90 border border-indigo-500/30 shadow-inner">
+        <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+          <span className="flex items-center gap-1.5 text-indigo-300">
+            <BrainCircuit className="w-3.5 h-3.5 text-indigo-400" />
+            <span>LangGraph Agent State Machine</span>
+          </span>
+          <span className="text-[9px] font-mono text-emerald-400 font-semibold bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20">
+            Sequential State Transfer
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-1 text-[10px]">
+          <span className="bg-slate-800 text-slate-200 px-2 py-0.5 rounded font-semibold border border-slate-700">
+            Worker Input
+          </span>
+          <span className="text-indigo-400 font-bold">↓</span>
+          {[
+            { label: 'Trade Auditor', idx: 0 },
+            { label: 'Skill Graph', idx: 1 },
+            { label: 'NSQF Mapper', idx: 2 },
+            { label: 'Future Skill Gap', idx: 3 },
+            { label: 'Upskilling Planner', idx: 4 },
+            { label: 'MSME Matcher', idx: 5 },
+            { label: 'Passport Generator', idx: 6 },
+            { label: 'WhatsApp Outreach', idx: 7 }
+          ].map((step, sIdx) => {
+            const isDone = sIdx < completedCount;
+            const isCurrent = isRunning && sIdx === currentStepIndex;
+            return (
+              <React.Fragment key={step.idx}>
+                <button
+                  type="button"
+                  onClick={() => setExpandedAgent(AGENT_NODES_CONFIG[sIdx].name)}
+                  className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all border ${
+                    isCurrent
+                      ? 'bg-indigo-600 text-white border-indigo-400 ring-2 ring-indigo-500/50 animate-pulse font-bold shadow-md'
+                      : isDone
+                      ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40 hover:bg-emerald-900/60'
+                      : 'bg-slate-900/80 text-slate-500 border-slate-800 hover:text-slate-300'
+                  }`}
+                  title={`Click to inspect ${step.label} agent`}
+                >
+                  {isDone && <span className="mr-0.5 text-emerald-400">✓</span>}
+                  {step.label}
+                </button>
+                {sIdx < 7 && <span className="text-slate-600 font-bold">↓</span>}
+              </React.Fragment>
+            );
+          })}
+        </div>
       </div>
 
       {/* 8 Agent Nodes List with Priority 4 Reasoning Visibility */}

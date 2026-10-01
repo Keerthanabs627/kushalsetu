@@ -23,7 +23,7 @@ export const BeforeAfterTransformationCard: React.FC<BeforeAfterTransformationCa
           </div>
           <div>
             <h3 className="text-base font-bold text-white tracking-tight">Before vs. After Transformation</h3>
-            <p className="text-[11px] text-slate-400">Quantifiable impact of sovereign autonomous employability intelligence</p>
+            <p className="text-[11px] text-slate-400">Quantifiable impact of verified autonomous employability intelligence</p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@ export const BeforeAfterTransformationCard: React.FC<BeforeAfterTransformationCa
           <ul className="space-y-2.5 text-xs">
             <li className="flex items-start gap-2 text-slate-200">
               <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              <span><strong>Verified Technician:</strong> Accredited sovereign digital identity with DigiLocker QR</span>
+              <span><strong>Verified Technician:</strong> Accredited digital employability identity with DigiLocker QR</span>
             </li>
             <li className="flex items-start gap-2 text-slate-200">
               <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />

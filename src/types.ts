@@ -4,6 +4,7 @@ export interface VerifiedSkill {
   confidence_score: number;
   evidence: string;
   tools_identified: string[];
+  evidence_source?: string;
 }
 
 export interface GraphNode {
@@ -41,6 +42,7 @@ export interface NSQFMapping {
   current_base_salary: number;
   nsqf_certified_salary: number;
   future_specialized_salary: number;
+  statutory_citation?: string;
 }
 
 export interface FutureSkillGap {
@@ -84,7 +86,8 @@ export interface MSMEJob {
   benefits: string[];
   match_score: number;
   demand_level: 'Critical' | 'Surge' | 'High';
-  interview_probability: 'Very High' | 'High' | 'Guaranteed Shortlist';
+  interview_probability: 'Very High' | 'High' | 'High Match Potential';
+  dataset_source?: string;
 }
 
 export interface EmployabilityPassport {
@@ -106,12 +109,11 @@ export interface EmployabilityPassport {
   issue_date: string;
   status: string;
   digilocker_compatible: boolean;
-  // Upgraded Priority 3 fields
   employment_probability: number;
   future_skills_readiness: number;
   career_path_trajectory: string;
   market_demand_score: 'High' | 'Very High' | 'Critical Demand';
-  placement_status: 'Placement Ready' | 'Interview Scheduled' | 'Direct Fast-Track';
+  placement_status: 'Prioritized for MSME Matching' | 'Placement Ready' | 'Interview Scheduled' | 'Direct Fast-Track';
 }
 
 export interface OutreachPayload {
@@ -125,6 +127,7 @@ export interface OutreachPayload {
   target_employers_count: number;
   expected_response_window: string;
   timeline_steps: { step: string; time: string; status: 'DONE' | 'CURRENT' | 'PENDING' }[];
+  is_valid_link: boolean;
 }
 
 export interface AgentLog {
@@ -134,11 +137,13 @@ export interface AgentLog {
   message: string;
   confidence: number;
   execution_ms?: number;
-  // Upgraded Priority 4 fields: Reasoning Visibility
   reasoning_summary?: string;
   evidence_used?: string;
   detected_skills?: string[];
   decision_rationale?: string;
+  tokens_used_estimate?: number;
+  state_inputs_summary?: string;
+  state_outputs_summary?: string;
 }
 
 export interface BharatImpactMetrics {
@@ -148,6 +153,32 @@ export interface BharatImpactMetrics {
   skill_gap_closure_rate: number;
   msme_match_rate: number;
   workforce_readiness_index: number;
+}
+
+export interface VisionAuditResult {
+  is_trade_related: boolean;
+  non_trade_detected?: string | null;
+  detected_objects: string[];
+  detected_tools: string[];
+  detected_ppe: string[];
+  workspace_context: string;
+  vision_confidence: number;
+  visual_inspection_notes: string;
+  audit_timestamp: string;
+}
+
+export interface ScoringFormulaBreakdown {
+  skill_points: number; // Max 40
+  skill_raw_pct: number;
+  nsqf_points: number; // Max 35
+  nsqf_raw_pct: number;
+  vision_points: number; // Max 15 (0 if non-trade or absent)
+  vision_raw_pct: number;
+  vision_verified: boolean;
+  demand_points: number; // Max 10
+  demand_raw_pct: number;
+  total_score: number;
+  formula_string: string;
 }
 
 export interface AgentState {
@@ -170,4 +201,11 @@ export interface AgentState {
   current_step?: string;
   pipeline_status: string;
   impact_metrics?: BharatImpactMetrics;
+  is_real_ai?: boolean;
+  ai_model?: string;
+  vision_analyzed?: boolean;
+  total_execution_ms?: number;
+  vision_audit?: VisionAuditResult;
+  scoring_formula?: ScoringFormulaBreakdown;
+  visual_inspection_notes?: string;
 }

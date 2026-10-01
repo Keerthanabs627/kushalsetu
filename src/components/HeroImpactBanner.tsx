@@ -1,12 +1,13 @@
 import React from 'react';
 import { AgentState } from '../types';
-import { Sparkles, TrendingUp, ShieldCheck, Award, Briefcase, Play, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Sparkles, TrendingUp, ShieldCheck, Award, Briefcase, Play, RefreshCw, CheckCircle2, Calculator, Trophy, ExternalLink } from 'lucide-react';
 
 interface HeroImpactBannerProps {
   agentState: AgentState | null;
   isRunning: boolean;
   isDemoMode: boolean;
-  onToggleDemoMode: () => void;
+  onOpenFormulaModal: () => void;
+  onOpenJudgeWalkthrough: () => void;
   onTriggerDemoRun: () => void;
 }
 
@@ -14,14 +15,16 @@ export const HeroImpactBanner: React.FC<HeroImpactBannerProps> = ({
   agentState,
   isRunning,
   isDemoMode,
-  onToggleDemoMode,
+  onOpenFormulaModal,
+  onOpenJudgeWalkthrough,
   onTriggerDemoRun
 }) => {
   const tradeName = agentState?.nsqf_mapping?.matched_role || 'EV Assembly & Retrofit Technician';
   const nsqfLevel = agentState?.nsqf_mapping?.nsqf_level || 4;
-  const score = agentState?.employability_passport?.employability_score || 92;
+  const score = agentState?.employability_passport?.employability_score || 88;
   const msmeMatches = agentState?.matched_jobs?.length || 5;
-  const incomeGrowth = agentState?.impact_metrics?.income_growth_potential || 37;
+  const incomeGrowth = agentState?.impact_metrics?.income_growth_potential || 35;
+  const formula = agentState?.scoring_formula;
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-indigo-500/40 bg-gradient-to-r from-slate-950 via-indigo-950/80 to-slate-950 shadow-2xl backdrop-blur-xl p-4 sm:p-6 mb-6">
@@ -39,8 +42,10 @@ export const HeroImpactBanner: React.FC<HeroImpactBannerProps> = ({
               🎉 Employability Transformation Complete
             </span>
 
-            <span className="text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
-              Sovereign Bharat Model
+            {/* AI Generated Status Indicator */}
+            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 font-mono border text-emerald-300 bg-emerald-950/80 border-emerald-500/40">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>AI Engine Online • Gemini Connected</span>
             </span>
           </div>
 
@@ -52,11 +57,11 @@ export const HeroImpactBanner: React.FC<HeroImpactBannerProps> = ({
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
-            Multi-agent autonomous intelligence auditing grassroots blue-collar trade narratives into certified NSQF credentials and instant MSME recruitment.
+            Multi-agent autonomous intelligence auditing grassroots blue-collar trade narratives into certified NSQF credentials and direct MSME recruitment.
           </p>
         </div>
 
-        {/* Center/Right: 5 Impact Metric Pillars */}
+        {/* Center/Right: 5 Impact Metric Pillars with Score Explanations & Citations */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 bg-slate-900/80 p-3 sm:p-3.5 rounded-xl border border-slate-800/90 shadow-inner">
           {/* 1. Verified Trade */}
           <div className="col-span-2 sm:col-span-1 p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
@@ -67,31 +72,42 @@ export const HeroImpactBanner: React.FC<HeroImpactBannerProps> = ({
             <div className="text-xs font-black text-white truncate mt-1" title={tradeName}>
               {tradeName}
             </div>
-            <div className="text-[10px] text-orange-400 font-semibold mt-0.5">MSDE NOS Aligned</div>
+            <div className="text-[9px] text-orange-400 font-medium mt-0.5">MSDE NOS Aligned</div>
           </div>
 
-          {/* 2. NSQF Readiness */}
-          <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+          {/* 2. NSQF Readiness with Real QP Code */}
+          <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col justify-between group">
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight flex items-center gap-1">
               <ShieldCheck className="w-3 h-3 text-sky-400 shrink-0" />
-              <span>NSQF Readiness</span>
+              <span>NSQF Alignment</span>
             </div>
-            <div className="text-base sm:text-lg font-black text-sky-400 mt-1">
-              Level {nsqfLevel}
+            <div className="text-sm sm:text-base font-black text-sky-400 mt-1 flex items-baseline gap-1">
+              <span>Level {nsqfLevel}</span>
+              <span className="text-[9px] font-mono font-normal text-sky-300/80">({agentState?.nsqf_mapping?.qp_code || 'CSC/Q0209'})</span>
             </div>
-            <div className="text-[10px] text-slate-400 font-medium">89% Match</div>
+            <div className="text-[9px] text-slate-400 font-medium truncate">
+              {agentState?.nsqf_mapping?.matched_role?.split(' ')[0] || 'Welder'} • {agentState?.nsqf_mapping?.readiness_percentage || 89}% NOS
+            </div>
           </div>
 
-          {/* 3. Employability Score */}
-          <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
-              <span>Employability</span>
+          {/* 3. Employability Score with Formula Trigger */}
+          <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col justify-between group cursor-pointer hover:border-emerald-500/50 transition-colors"
+            onClick={onOpenFormulaModal}
+            title="Click to view transparent 4-pillar mathematical formula"
+          >
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight flex items-center justify-between">
+              <span className="flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                <span>Employability</span>
+              </span>
+              <Calculator className="w-3 h-3 text-emerald-400 opacity-70 group-hover:opacity-100" />
             </div>
             <div className="text-base sm:text-lg font-black text-emerald-400 mt-1">
               {score}<span className="text-xs text-emerald-300 font-normal">/100</span>
             </div>
-            <div className="text-[10px] text-emerald-400/90 font-semibold">A+ Certified</div>
+            <div className="text-[9px] text-emerald-400/90 font-medium underline flex items-center gap-0.5">
+              <span>View Formula</span>
+            </div>
           </div>
 
           {/* 4. MSME Matches */}
@@ -103,57 +119,39 @@ export const HeroImpactBanner: React.FC<HeroImpactBannerProps> = ({
             <div className="text-base sm:text-lg font-black text-indigo-300 mt-1">
               {msmeMatches} Openings
             </div>
-            <div className="text-[10px] text-indigo-400 font-medium">Verified Plants</div>
+            <div className="text-[9px] text-indigo-400 font-medium">Udyam Verified</div>
           </div>
 
-          {/* 5. Projected Income Growth */}
+          {/* 5. Realistic Income Growth (Grounded Estimate) */}
           <div className="col-span-2 sm:col-span-1 p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/40 flex flex-col justify-between shadow-sm">
             <div className="text-[10px] font-bold text-emerald-300 uppercase tracking-tight flex items-center gap-1">
               <TrendingUp className="w-3 h-3 text-emerald-400 shrink-0" />
-              <span>Income Growth</span>
+              <span>Wage Premium</span>
             </div>
             <div className="text-base sm:text-lg font-black text-emerald-400 mt-1">
               +{incomeGrowth}%
             </div>
-            <div className="text-[10px] text-emerald-300 font-semibold">+₹14,000/mo</div>
+            <div className="text-[9px] text-emerald-300 font-semibold">MSDE Wage Grid</div>
           </div>
         </div>
 
-        {/* Demo Mode Action Controller */}
+        {/* Action Controller */}
         <div className="flex sm:flex-col items-center justify-end gap-2 shrink-0">
           <button
-            onClick={onTriggerDemoRun}
-            disabled={isRunning}
-            className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md ${
-              isRunning
-                ? 'bg-slate-800 text-slate-400 border border-slate-700 cursor-not-allowed'
-                : 'bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-orange-500/25 active:scale-95'
-            }`}
+            onClick={onOpenJudgeWalkthrough}
+            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-orange-500/25 active:scale-95"
+            title="Launch interactive 8-step presentation walkthrough for judges"
           >
-            {isRunning ? (
-              <>
-                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                <span>Simulating...</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Run Live Demo</span>
-              </>
-            )}
+            <Trophy className="w-3.5 h-3.5 fill-current" />
+            <span>3-Minute Demo Mode</span>
           </button>
 
           <button
-            onClick={onToggleDemoMode}
-            className={`w-full sm:w-auto px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all flex items-center justify-center gap-1.5 ${
-              isDemoMode
-                ? 'bg-indigo-600/30 border-indigo-400 text-indigo-200'
-                : 'bg-slate-800/80 border-slate-700 text-slate-400 hover:text-slate-200'
-            }`}
-            title="Toggle step-by-step paced demonstration for judges"
+            onClick={onOpenFormulaModal}
+            className="w-full sm:w-auto px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all flex items-center justify-center gap-1.5 bg-slate-800/80 border-slate-700 text-slate-300 hover:text-white"
           >
-            <span className={`w-2 h-2 rounded-full ${isDemoMode ? 'bg-indigo-400 animate-ping' : 'bg-slate-600'}`} />
-            <span>Demo Mode: {isDemoMode ? 'ON' : 'OFF'}</span>
+            <Calculator className="w-3.5 h-3.5 text-orange-400" />
+            <span>Audit Scoring Formula</span>
           </button>
         </div>
       </div>

@@ -80,9 +80,9 @@ def generate_structured_response(
         if system_instruction:
             config.system_instruction = system_instruction
 
-        # Gemini 2.5 Flash model
+        # Gemini 3.8 Flash model
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.8-flash",
             contents=contents,
             config=config
         )

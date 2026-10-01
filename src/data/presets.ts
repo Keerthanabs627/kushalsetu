@@ -13,12 +13,15 @@ export interface PresetProfile {
   imageThumbnail: string; // SVG data URI
 }
 
-// Crisp stylized SVG mock image badges representing tools and workpieces
+// Stylized SVG image representations for trade tools and deliberate non-trade tests
 export const SAMPLE_IMAGES = {
   welding: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%231e293b'/><circle cx='200' cy='150' r='60' fill='%23334155' stroke='%23f97316' stroke-width='4'/><path d='M160 150 L240 150 M200 110 L200 190' stroke='%2338bdf8' stroke-width='3'/><path d='M170 120 L230 180 M170 180 L230 120' stroke='%23facc15' stroke-width='2' stroke-dasharray='4'/><text x='200' y='250' font-family='sans-serif' font-size='14' fill='%23f8fafc' text-anchor='middle' font-weight='bold'>MIG/TIG Shielded Gas Torch & Plate Joint</text><text x='200' y='275' font-family='sans-serif' font-size='11' fill='%2394a3b8' text-anchor='middle'>Workpiece Inspection: Sound Root Penetration</text></svg>",
+  electrician: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%23111827'/><rect x='60' y='40' width='280' height='200' rx='8' fill='%231f2937' stroke='%2338bdf8' stroke-width='3'/><rect x='80' y='60' width='60' height='40' fill='%23dc2626'/><rect x='150' y='60' width='60' height='40' fill='%23eab308'/><rect x='220' y='60' width='60' height='40' fill='%232563eb'/><rect x='80' y='120' width='200' height='80' rx='4' fill='%23374151'/><circle cx='130' cy='160' r='18' fill='%2310b981'/><rect x='180' y='145' width='80' height='30' fill='%230f172a' stroke='%23fbbf24' stroke-width='2'/><text x='220' y='165' font-family='monospace' font-size='12' fill='%23fbbf24' text-anchor='middle'>415.2 V</text><text x='200' y='265' font-family='sans-serif' font-size='13' fill='%2338bdf8' text-anchor='middle' font-weight='bold'>415V Industrial 3-Phase Distribution Panel & MCBs</text><text x='200' y='285' font-family='sans-serif' font-size='11' fill='%2394a3b8' text-anchor='middle'>Digital Multimeter Verified • Class 0 Insulated Gauntlets</text></svg>",
   solar: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%230f291e'/><rect x='80' y='60' width='240' height='150' rx='8' fill='%231e3a8a' stroke='%2360a5fa' stroke-width='3'/><line x1='80' y1='110' x2='320' y2='110' stroke='%2393c5fd' stroke-width='2'/><line x1='80' y1='160' x2='320' y2='160' stroke='%2393c5fd' stroke-width='2'/><line x1='160' y1='60' x2='160' y2='210' stroke='%2393c5fd' stroke-width='2'/><line x1='240' y1='60' x2='240' y2='210' stroke='%2393c5fd' stroke-width='2'/><text x='200' y='250' font-family='sans-serif' font-size='14' fill='%2334d399' text-anchor='middle' font-weight='bold'>Rooftop PV String & MC4 Combiner Box</text><text x='200' y='275' font-family='sans-serif' font-size='11' fill='%2394a3b8' text-anchor='middle'>Multimeter VOC: 580V DC | Earth: 2.1 Ohms</text></svg>",
   ev: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%231a1a2e'/><rect x='90' y='70' width='220' height='130' rx='10' fill='%2316213e' stroke='%2310b981' stroke-width='3'/><circle cx='130' cy='135' r='20' fill='%23e94560'/><circle cx='180' cy='135' r='20' fill='%23e94560'/><circle cx='230' cy='135' r='20' fill='%23e94560'/><circle cx='270' cy='135' r='14' fill='%230f3460' stroke='%2338bdf8' stroke-width='2'/><text x='200' y='245' font-family='sans-serif' font-size='14' fill='%23a7f3d0' text-anchor='middle' font-weight='bold'>72V Li-ion Battery Pack & Smart BMS Harness</text><text x='200' y='270' font-family='sans-serif' font-size='11' fill='%2394a3b8' text-anchor='middle'>CAN Bus Scan: No DTC faults, Cell Delta 12mV</text></svg>",
   cnc: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%2318181b'/><rect x='100' y='60' width='200' height='140' rx='6' fill='%2327272a' stroke='%23f59e0b' stroke-width='3'/><circle cx='200' cy='130' r='45' fill='%233f3f46' stroke='%23fbbf24' stroke-width='2'/><text x='200' y='135' font-family='monospace' font-size='12' fill='%23fbbf24' text-anchor='middle'>±0.005mm</text><text x='200' y='245' font-family='sans-serif' font-size='14' fill='%23fbbf24' text-anchor='middle' font-weight='bold'>Fanuc CNC VMC Tool Offset & Spindle Setup</text><text x='200' y='270' font-family='sans-serif' font-size='11' fill='%2394a3b8' text-anchor='middle'>Hydraulic Vice Clamping & Dial Gauge Verified</text></svg>",
+  dog: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%23451a03'><rect width='400' height='300' fill='%2378350f'/><circle cx='200' cy='130' r='55' fill='%23d97706'/><polygon points='150,80 170,120 135,110' fill='%2392400e'/><polygon points='250,80 230,120 265,110' fill='%2392400e'/><circle cx='180' cy='125' r='8' fill='%231c1917'/><circle cx='220' cy='125' r='8' fill='%231c1917'/><ellipse cx='200' cy='150' rx='14' ry='10' fill='%231c1917'/><text x='200' y='235' font-family='sans-serif' font-size='13' fill='%23fef3c7' text-anchor='middle' font-weight='bold'>TEST: Domestic Canine / Pet Photo</text><text x='200' y='260' font-family='sans-serif' font-size='11' fill='%23fde68a' text-anchor='middle'>Non-Trade Evidence: Vision AI Must Flag & Reject</text></svg>",
+  selfie: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300' fill='%231e1b4b'><rect width='400' height='300' fill='%23312e81'/><circle cx='200' cy='120' r='45' fill='%23fbcfe8'/><path d='M130,220 C130,170 270,170 270,220' fill='%234338ca'/><text x='200' y='250' font-family='sans-serif' font-size='13' fill='%23e0e7ff' text-anchor='middle' font-weight='bold'>TEST: Casual Selfie Without Tools</text><text x='200' y='275' font-family='sans-serif' font-size='11' fill='%23c7d2fe' text-anchor='middle'>Non-Trade Evidence: Vision AI Must Penalize</text></svg>"
 };
 
 export const PRESET_PROFILES: PresetProfile[] = [
@@ -69,6 +72,18 @@ export const PRESET_PROFILES: PresetProfile[] = [
     tradeDescription: "Fanuc 0i-MF controller la 3-axis VMC milling machine operate pannuven. G-code, M-code offset setting, vernier micrometer la ±10 micron tolerance check pannuven. Hydraulic vice clamping, carbide tool insert change, chip cleaning accurate ah seiwen.",
     imageTag: "CNC VMC Control & Caliper",
     imageThumbnail: SAMPLE_IMAGES.cnc
+  },
+  {
+    id: "p5",
+    name: "Vikas Sharma (Judge Test: Dog Photo)",
+    roleTitle: "Automotive Engine Mechanic (Unrelated Image Test)",
+    location: "Peenya Industrial Area, Bengaluru, Karnataka",
+    language: "Hindi",
+    experience: 4.0,
+    phone: "+91 98450 99887",
+    tradeDescription: "Main diesel tractor aur auto engine overhaul karta hu, fuel pump nozzle calibrate karta hu.",
+    imageTag: "TEST: Dog Photo (Non-Trade Evidence)",
+    imageThumbnail: SAMPLE_IMAGES.dog
   }
 ];
 
@@ -90,7 +105,8 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["Subsidized cafeteria", "ESI + Provident Fund", "Quarterly attendance bonus", "Company bus route"],
     match_score: 96,
     demand_level: "Critical",
-    interview_probability: "Very High"
+    interview_probability: "Very High",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   },
   {
     id: "MSME-BLR-02",
@@ -109,7 +125,8 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["ESI + PF", "Overtime allowance 1.5x", "Subsidized canteen", "Annual safety gear grant"],
     match_score: 94,
     demand_level: "High",
-    interview_probability: "Very High"
+    interview_probability: "Very High",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   },
   {
     id: "MSME-DEL-03",
@@ -128,7 +145,8 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["Site travel DA ₹350/day", "Accident insurance ₹5L", "Tool kit grant"],
     match_score: 92,
     demand_level: "Surge",
-    interview_probability: "High"
+    interview_probability: "High",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   },
   {
     id: "MSME-CHE-04",
@@ -147,7 +165,8 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["Night shift allowance", "ESIC medical card", "Annual performance bonus"],
     match_score: 91,
     demand_level: "High",
-    interview_probability: "High"
+    interview_probability: "High",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   },
   {
     id: "MSME-MAN-05",
@@ -166,7 +185,8 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["Subsidized hostel accommodation", "PF & medical", "Annual bonus"],
     match_score: 89,
     demand_level: "Surge",
-    interview_probability: "Guaranteed Shortlist"
+    interview_probability: "High Match Potential",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   },
   {
     id: "MSME-PUN-06",
@@ -185,6 +205,7 @@ export const BENCHMARK_MSME_JOBS: MSMEJob[] = [
     benefits: ["Free transport from Bhosari circle", "PF + Gratuity", "Quarterly attendance bonus"],
     match_score: 88,
     demand_level: "High",
-    interview_probability: "High"
+    interview_probability: "High",
+    dataset_source: "Ministry of MSME Udyam Registration & NCS Industrial Cluster Requisitions"
   }
 ];

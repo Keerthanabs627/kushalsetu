@@ -153,7 +153,7 @@ export const BottomPanel: React.FC<BottomPanelProps> = ({
                         : 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300';
 
                     const probBadge =
-                      job.interview_probability === 'Very High' || job.interview_probability === 'Guaranteed Shortlist'
+                      job.interview_probability === 'Very High' || job.interview_probability === 'High Match Potential'
                         ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-300'
                         : 'bg-sky-950/70 border-sky-500/50 text-sky-300';
 
@@ -194,9 +194,9 @@ export const BottomPanel: React.FC<BottomPanelProps> = ({
                               </span>
                             </div>
 
-                            {/* Interview Probability */}
+                            {/* Interview Likelihood */}
                             <div className={`p-2 rounded-lg border ${probBadge}`}>
-                              <span className="text-slate-400 block font-medium">Interview Prob.</span>
+                              <span className="text-slate-400 block font-medium">Interview Likelihood</span>
                               <span className="text-xs font-black block mt-0.5">
                                 {job.interview_probability}
                               </span>
@@ -228,15 +228,22 @@ export const BottomPanel: React.FC<BottomPanelProps> = ({
                           <div className="text-[10px] text-slate-400 truncate max-w-[120px]">
                             Lead: <span className="text-slate-200">{job.contact_person.split('(')[0]}</span>
                           </div>
-                          <a
-                            href={`https://api.whatsapp.com/send?phone=${job.contact_whatsapp.replace(/[^0-9]/g, '')}&text=Hello%20${encodeURIComponent(job.contact_person)},%20I%20am%20applying%20for%20the%20${encodeURIComponent(job.role)}%20position%20with%20my%20KaushalSetu%20verified%20passport.`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-1 text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg shadow-sm transition-all active:scale-95"
-                          >
-                            <Phone className="w-3 h-3" />
-                            <span>WhatsApp HR</span>
-                          </a>
+                          {(() => {
+                            const raw = job.contact_whatsapp.replace(/[^0-9]/g, '');
+                            const phoneE164 = raw.startsWith('91') ? raw : `91${raw}`;
+                            const textMsg = encodeURIComponent(`नमस्ते / Hello ${job.contact_person}, I am applying for the ${job.role} position with my verified KaushalSetu Employability Passport.`);
+                            return (
+                              <a
+                                href={`https://wa.me/${phoneE164}?text=${textMsg}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex items-center gap-1.5 text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg shadow-sm transition-all active:scale-95"
+                              >
+                                <Phone className="w-3 h-3" />
+                                <span>wa.me Chat HR</span>
+                              </a>
+                            );
+                          })()}
                         </div>
                       </div>
                     );
